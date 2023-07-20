@@ -1,0 +1,39 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        // Checkout the source code from version control
+        git 'https://github.com/your-repo.git'
+        
+        // Build the development Docker image
+        sh 'docker build -t your-image-name-dev -f Dockerfile.dev .'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        // Run tests inside the development Docker container
+        sh 'docker run --rm your-image-name-dev python -m unittest discover'
+      }
+    }
+
+    stage('Build Production Image') {
+      steps {
+        // Build the production Docker image
+        sh 'docker build -t your-image-name-prod -f Dockerfile.prod .'
+      }
+    }
+
+    stage('Deploy to Production') {
+      steps {
+        // Push the production Docker image to a registry (e.g., Docker Hub)
+        sh 'docker push your-image-name-prod'
+        
+        // Deploy the application using your preferred method (e.g., Kubernetes, Docker Swarm, etc.)
+        // Add the necessary deployment commands here
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+Replace 'https://github.com/your-repo.git' in the Jenkinsfile with the URL of your source code repository. Also, update your-image-name-dev and your-image-name-prod with the appropriate image names.
+
+This Jenkinsfile defines a Declarative Pipeline with four stages:
+
+Build: It checks out the source code from the specified Git repository and builds the development Docker image using the Dockerfile.dev.
+Test: It runs tests inside the development Docker container using python -m unittest discover.
+Build Production Image: It builds the production Docker image using the Dockerfile.prod.
+Deploy to Production: It pushes the production Docker image to a registry (e.g., Docker Hub) and then deploys the application to production using your preferred deployment method. You would need to add the necessary deployment commands based on your infrastructure.
+Make sure to customize the Dockerfiles, Jenkinsfile, and code files according to your specific project's needs and requirements.
